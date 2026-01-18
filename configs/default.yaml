@@ -1,0 +1,30 @@
+paths:
+  data_dir: data/processed
+  experiments_dir: experiments
+  results_dir: results
+
+preprocess:
+  enable: false
+  raw_dir: data/raw
+  out_dir: data/processed
+
+callbacks:
+  early_stopping:
+    monitor: val_loss
+    mode: min
+    patience: 10
+    min_delta: 0.0
+
+  model_checkpoint:
+    monitor: val_loss
+    mode: min
+    save_top_k: 1
+    save_last: true
+    save_weights_only: false
+    every_n_epochs: null
+    every_n_train_steps: null
+    train_time_interval: null
+
+logging:
+  use_wandb: false
+  project: ts_proj

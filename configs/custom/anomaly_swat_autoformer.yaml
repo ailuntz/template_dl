@@ -1,0 +1,104 @@
+experiment_name: anomaly_swat_autoformer
+experiment_overwrite: true
+seed: 2026
+model_name: autoformer
+dataset_name: swat
+loss_name: mse
+optim_name: adam
+
+task:
+  anomaly:
+    seq_len: 96
+    label_len: 0
+    pred_len: 96
+    scale: false
+    timeenc: 0
+    time_features: false
+    anomaly_ratio: 0.25
+    window_step: 1
+
+data:
+  split_mode: tsl
+  split:
+    train: 0.7
+    val: 0.2
+    test: 0.1
+  loader:
+    batch_size: 128
+    num_workers: 2
+    persistent_workers: true
+    train:
+      drop_last: false
+    eval:
+      drop_last: false
+
+model:
+  autoformer:
+    name: autoformer
+    task_name: anomaly
+    enc_in: 51
+    dec_in: 51
+    c_out: 51
+    seq_len: 96
+    label_len: 0
+    pred_len: 96
+    d_model: 512
+    n_heads: 8
+    e_layers: 2
+    d_layers: 1
+    d_ff: 2048
+    dropout: 0.1
+    factor: 1
+    moving_avg: 25
+    activation: gelu
+    embed: fixed
+    freq: h
+
+dataset:
+  swat:
+    name: swat
+    root: datasets/SWaT
+    train_path: swat_train2.csv
+    test_path: swat2.csv
+    infer_data_path: null
+    schema:
+      label_col: Normal/Attack
+      date_col: time
+      target: FIT101
+      features: M
+      freq: null
+      num_features: 51
+      target_index: 0
+
+loss:
+  mse:
+    name: mse
+
+optim:
+  adam:
+    lr: 1e-3
+    weight_decay: 0.0
+
+trainer:
+  max_epochs: 10
+  min_epochs: 1
+  accelerator: auto
+  devices: 1
+  precision: 32
+
+callbacks:
+  early_stopping:
+    monitor: val_loss
+    mode: min
+    patience: 10
+    min_delta: 0.0
+
+  model_checkpoint:
+    monitor: val_loss
+    mode: min
+    save_top_k: 0
+    save_last: true
+    save_weights_only: false
+    every_n_epochs: null
+    every_n_train_steps: null
+    train_time_interval: null

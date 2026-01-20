@@ -50,6 +50,7 @@ model:
 
 dataset:
   spokenarabicdigits:
+    huggingface_repo: ailuntz/SpokenArabicDigits
     name: spokenarabicdigits
     root: datasets/SpokenArabicDigits
     train_path: SpokenArabicDigits_TRAIN.ts

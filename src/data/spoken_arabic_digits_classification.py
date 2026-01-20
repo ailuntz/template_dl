@@ -5,6 +5,7 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 
+from src.utils.hf import ensure_hf_dataset
 _CACHE = {}
 
 
@@ -118,6 +119,7 @@ class SpokenArabicDigitsDataset(Dataset):
         dataset_cfg = cfg["dataset"][cfg["dataset_name"]]
         data_cfg = cfg["data"]
         root = Path(dataset_cfg["root"])
+        ensure_hf_dataset(root, dataset_cfg.get("huggingface_repo"))
         train_name = dataset_cfg.get("train_path") or "SpokenArabicDigits_TRAIN.ts"
         test_name = dataset_cfg.get("test_path") or "SpokenArabicDigits_TEST.ts"
         train_path = Path(train_name)

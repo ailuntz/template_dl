@@ -7,6 +7,7 @@ import torch
 from torch.utils.data import Dataset
 
 from src.data.ett_small_forecast import StandardScaler
+from src.utils.hf import ensure_hf_dataset
 
 
 class SWaTAnomalyDataset(Dataset):
@@ -19,6 +20,7 @@ class SWaTAnomalyDataset(Dataset):
             raise ValueError("缺少 task 配置")
         data_cfg = cfg["data"]
         self.root = Path(dataset_cfg["root"])
+        ensure_hf_dataset(self.root, dataset_cfg.get("huggingface_repo"))
         train_path = dataset_cfg.get("train_path") or "swat_train2.csv"
         test_path = dataset_cfg.get("test_path") or "swat2.csv"
         self.train_path = Path(train_path)

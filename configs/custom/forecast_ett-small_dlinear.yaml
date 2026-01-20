@@ -41,6 +41,7 @@ model:
 
 dataset:
   ett-small:
+    huggingface_repo: ailuntz/ETT-small
     name: ett-small
     root: datasets/ETT-small
     data_path: ETTh1.csv

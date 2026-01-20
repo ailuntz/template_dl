@@ -44,6 +44,7 @@ model:
 
 dataset:
   swat:
+    huggingface_repo: ailuntz/SWaT
     name: swat
     root: datasets/SWaT
     train_path: swat_train2.csv

@@ -6,6 +6,7 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset
 
+from src.utils.hf import ensure_hf_dataset
 
 class StandardScaler:
     def __init__(self):
@@ -46,6 +47,7 @@ def _load_ett_small(cfg: Dict, split: str) -> Dict:
     data_cfg = cfg["data"]
     schema = dataset_cfg["schema"]
     root = Path(dataset_cfg["root"])
+    ensure_hf_dataset(root, dataset_cfg.get("huggingface_repo"))
     infer_path = dataset_cfg["infer_data_path"]
     if split == "predict" and infer_path:
         data_path = infer_path

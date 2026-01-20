@@ -6,6 +6,7 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset
 
+from src.utils.hf import ensure_hf_dataset
 
 class M4Meta:
     horizons_map = {
@@ -44,6 +45,7 @@ class M4ForecastDataset(Dataset):
         if task_cfg is None:
             raise ValueError("缺少 task 配置")
         self.root = Path(dataset_cfg["root"])
+        ensure_hf_dataset(self.root, dataset_cfg.get("huggingface_repo"))
         self.seasonal_patterns = str(dataset_cfg["seasonal_patterns"])
         self.seq_len = int(task_cfg["seq_len"])
         self.label_len = int(task_cfg.get("label_len", 0))

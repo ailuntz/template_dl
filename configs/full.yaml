@@ -99,6 +99,7 @@ model:
 
 dataset:
   ett-small:
+    huggingface_repo: ailuntz/ETT-small
     name: ett-small
     root: datasets/ETT-small
     data_path: ETTh1.csv
@@ -111,6 +112,7 @@ dataset:
       num_features: 7
       target_index: 0
   m4:
+    huggingface_repo: ailuntz/m4
     name: m4
     root: datasets/m4
     data_path: training.npz
@@ -124,6 +126,7 @@ dataset:
       num_features: 1
       target_index: 0
   swat:
+    huggingface_repo: ailuntz/SWaT
     name: swat
     root: datasets/SWaT
     train_path: swat_train2.csv
@@ -138,6 +141,7 @@ dataset:
       num_features: 51
       target_index: 0
   spokenarabicdigits:
+    huggingface_repo: ailuntz/SpokenArabicDigits
     name: spokenarabicdigits
     root: datasets/SpokenArabicDigits
     train_path: SpokenArabicDigits_TRAIN.ts

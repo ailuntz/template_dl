@@ -38,6 +38,7 @@ model:
 
 dataset:
   m4:
+    huggingface_repo: ailuntz/m4
     name: m4
     root: datasets/m4
     data_path: training.npz

@@ -1,4 +1,5 @@
 from pathlib import Path
+import shutil
 
 import numpy as np
 import pandas as pd
@@ -11,6 +12,7 @@ class preprocesstest:
     def run(self) -> None:
         raw_dir = Path(self.cfg.get("raw_dir", "data/raw"))
         out_dir = Path(self.cfg.get("out_dir", "data/processed"))
+        root_dir = Path(self.cfg["root"]) if self.cfg.get("root") else None
         train_size = int(self.cfg.get("train_size", 256))
         val_size = int(self.cfg.get("val_size", 64))
         test_size = int(self.cfg.get("test_size", 64))
@@ -22,6 +24,10 @@ class preprocesstest:
 
         self._generate_raw_data(raw_dir, train_size, val_size, test_size, num_features, num_classes)
         self._process_csv(raw_dir, out_dir)
+        if root_dir:
+            if root_dir.exists():
+                shutil.rmtree(root_dir)
+            shutil.copytree(out_dir, root_dir)
         print(f"预处理完成: raw={raw_dir}, processed={out_dir}")
 
     @staticmethod

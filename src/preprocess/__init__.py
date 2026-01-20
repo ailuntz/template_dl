@@ -2,7 +2,6 @@ from src.preprocess.preprocesstest import preprocesstest
 
 _PREPROCESS_REGISTRY = {
     "mock": preprocesstest,
-    "test2": preprocesstest,
 }
 
 

@@ -6,6 +6,7 @@ preprocess_name: mock
 
 preprocess:
   mock:
+    root: datasets/mock
     raw_dir: data/raw1
     out_dir: data/processed1
     train_size: 256

@@ -1,12 +1,18 @@
 paths:
-  data_dir: data/processed
   experiments_dir: experiments
   results_dir: results
 
+preprocess_name: mock
+
 preprocess:
-  enable: false
-  raw_dir: data/raw
-  out_dir: data/processed
+  mock:
+    raw_dir: data/raw1
+    out_dir: data/processed1
+    train_size: 256
+    val_size: 64
+    test_size: 64
+    num_features: 32
+    num_classes: 10
 
 callbacks:
   early_stopping:

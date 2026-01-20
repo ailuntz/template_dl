@@ -70,3 +70,4 @@ def load_config(path: Path, overrides: Optional[Sequence[Path]], cli_overrides: 
 
     OmegaConf.set_struct(cfg, True)
     return cfg
+
